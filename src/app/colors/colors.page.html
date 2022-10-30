@@ -1,0 +1,83 @@
+<ion-header inline>
+  <ion-title size="1">{{ 'COLOR PICKER'  }}</ion-title>
+  <ion-label>{{'admin panel'}}</ion-label>
+  <ion-button color="medium" style="color: blue" (click)="logOut()" >Exit</ion-button>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-title>{{'POPULAR SITES'}}</ion-title>
+      <ion-grid class="table">
+        <ion-row>
+          <ion-col size="1">{{'№'}}</ion-col>
+          <ion-col>{{'site'}}</ion-col>
+          <ion-col size="2">{{'count'}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of data.countSite; index as i">
+          <ion-col size="1">{{i + 1}}</ion-col>
+          <ion-col>{{item.domain}}</ion-col>
+          <ion-col size="2">{{item.domainCount}}</ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-col>
+    <ion-col>
+      <ion-title>{{'POPULAR COLORS'}}</ion-title>
+      <ion-grid class="colors">
+        <ng-container *ngFor="let i of getItemColor()">
+          <div class="square" [style]="{background:i.hex }">{{i.title}}</div>
+        </ng-container>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-grid class="table">
+      <ion-row>
+        <ion-col>{{'Page'}}</ion-col>
+        <ion-col size="0.4">{{'Color'}}</ion-col>
+        <ion-col size="1">{{'Color code'}}</ion-col>
+        <ion-col size="1">{{'Element type'}}</ion-col>
+        <ion-col size="2">{{'Date and time'}}</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let item of data.colorsList; index as i">
+        <ion-col><a (click)="openSite(item.site)">{{item.site}}</a></ion-col>
+        <ion-col size="0.4">
+          <div class="circle" [style]="{background:item.hex }"></div>
+
+        </ion-col>
+        <ion-col size="1">{{item.rgb}}<br>{{item.hex}}</ion-col>
+        <ion-col size="1">{{item.type}}</ion-col>
+        <ion-col size="2">{{item.createdAt| date:'short'}}</ion-col>
+
+      </ion-row>
+      <div class="pagination ">
+        <button
+          [disabled]="currPage === 1"
+          (click)="selectPage(1)">
+          <<
+        </button>
+        <button
+          [disabled]="currPage === 1"
+          (click)="selectPage(currPage - 1)">
+          <
+        </button>
+        <button
+          *ngFor="let page of getVisiblePages()"
+          [ngClass]="currPage === page && 'selected'"
+          (click)="selectPage(page)">
+          {{ page }}
+        </button>
+        <button
+          [disabled]="currPage === getMathFloor(data.countItems/20)+1"
+          (click)="selectPage(currPage + 1)">
+          >
+        </button>
+        <button
+          [disabled]="currPage === getMathFloor(data.countItems/20)+1"
+          (click)="selectPage(getMathFloor(data.countItems/20)+1)">
+          >>
+        </button>
+      </div>
+    </ion-grid>
+  </ion-row>
+</ion-content>
