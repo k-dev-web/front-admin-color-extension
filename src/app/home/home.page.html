@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-title>{{ 'LOGIN'  }}</ion-title>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="center">
+    <ion-row>
+      <ion-title size="medium"> Enter to admin panel</ion-title>
+    </ion-row>
+    <form>
+
+      <ion-row>
+        <ion-input  [(ngModel)]="account.login" name="login" placeholder="Login"></ion-input>
+      </ion-row>
+
+      <ion-row>
+        <ion-input  [(ngModel)]="account.password" name="password" placeholder="Password"></ion-input>
+      </ion-row>
+
+
+    </form>
+    <ion-row>
+      <ion-button color="primary" block (click)="Login()">{{ 'LOGIN'  }}</ion-button>
+      <ion-button color="primary" block (click)="signup()">{{ 'SIGNUP'  }}</ion-button>
+
+    </ion-row>
+  </div>
+</ion-content>

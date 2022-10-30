@@ -1,0 +1,7 @@
+{
+  "name": "test-fron-extension",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
